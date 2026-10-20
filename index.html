@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101827">
+  <title>Royal Pay</title>
+  <style>
+    :root { color-scheme: dark; --bg:#101827; --panel:#182235; --accent:#f2c14e; --text:#f4f7fb; --muted:#aeb9ca; }
+    * { box-sizing:border-box; }
+    body { margin:0; font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif; background:linear-gradient(180deg,#101827,#0b1220); color:var(--text); }
+    header { padding:24px 18px 18px; background:#111d30; border-bottom:1px solid #2a3850; }
+    .brand { font-size:25px; font-weight:800; letter-spacing:.2px; }
+    .brand span { color:var(--accent); }
+    .sub { color:var(--muted); margin-top:6px; font-size:14px; }
+    main { max-width:720px; margin:auto; padding:18px; }
+    .balance { background:linear-gradient(135deg,#263b5b,#182235); padding:22px; border-radius:18px; border:1px solid #344966; }
+    .label { color:var(--muted); font-size:14px; }
+    .amount { font-size:32px; font-weight:800; margin:8px 0 4px; }
+    .note { color:var(--muted); font-size:12px; line-height:1.5; }
+    .grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; margin-top:16px; }
+    .card { background:var(--panel); border:1px solid #2a3850; border-radius:16px; padding:16px; }
+    .card h2 { margin:0 0 8px; font-size:17px; }
+    .card p { margin:0 0 14px; color:var(--muted); font-size:13px; line-height:1.45; }
+    button, select, input { font:inherit; }
+    button { border:0; border-radius:10px; padding:11px 14px; background:var(--accent); color:#1b2432; font-weight:750; width:100%; }
+    button.secondary { background:#26364d; color:var(--text); border:1px solid #40536e; }
+    button:disabled { opacity:.55; }
+    .section-title { margin:24px 0 12px; font-size:18px; }
+    .form-row { display:grid; gap:10px; margin-top:10px; }
+    input, select { width:100%; padding:12px; border-radius:10px; border:1px solid #40536e; background:#101827; color:var(--text); }
+    footer { padding:18px; text-align:center; color:var(--muted); font-size:12px; }
+    #message { margin-top:12px; color:var(--accent); font-size:13px; line-height:1.5; }
+    @media (max-width:480px) { .grid { grid-template-columns:1fr; } }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="brand">👑 Royal <span>Pay</span></div>
+    <div class="sub">Watch, learn, and earn — rewards are not live yet.</div>
+  </header>
+  <main>
+    <section class="balance">
+      <div class="label">Demo balance</div>
+      <div class="amount">₦0.00</div>
+      <div class="note">This is a preview only. No real money is being credited or paid out.</div>
+    </section>
+
+    <div class="grid">
+      <section class="card">
+        <h2>📺 Watch ads</h2>
+        <p>Real ads must be connected and approved before this feature can reward users.</p>
+        <button id="watchBtn">Check ad setup</button>
+      </section>
+      <section class="card">
+        <h2>🎁 Daily reward</h2>
+        <p>Daily rewards can be enabled after a secure reward system is configured.</p>
+        <button class="secondary" id="dailyBtn">View status</button>
+      </section>
+    </div>
+
+    <h2 class="section-title">Withdrawal methods</h2>
+    <section class="card">
+      <p>These are the requested payout options. They are display-only until a verified payout provider and server are connected.</p>
+      <div class="form-row">
+        <select id="method" aria-label="Withdrawal method">
+          <option>PayPal</option>
+          <option>Mobile Money</option>
+          <option>Bank Transfer</option>
+        </select>
+        <input id="account" placeholder="Payout account (demo only)" autocomplete="off">
+        <button id="withdrawBtn">Check withdrawal setup</button>
+      </div>
+      <div id="message" role="status" aria-live="polite"></div>
+    </section>
+    <h2 class="section-title">Next steps</h2>
+    <section class="card">
+      <p>Before launch: connect a real ad SDK, verify completed ad views on a server, add fraud protection, and integrate a legitimate payout provider. Never collect a user's payout details until the system is secure.</p>
+      <button class="secondary" id="stepsBtn">Show setup status</button>
+      <div id="setupStatus" class="note" style="margin-top:10px"></div>
+    </section>
+  </main>
+  <footer>Royal Pay · Preview build · Real ads and payouts are not connected</footer>
+  <script>
+    const msg = document.getElementById('message');
+    document.getElementById('watchBtn').onclick = () => {
+      msg.textContent = 'Ad service is not connected in this preview. Do not award money until a real ad SDK and server-side verification are configured.';
+    };
+    document.getElementById('dailyBtn').onclick = () => {
+      msg.textContent = 'Daily rewards are not active yet.';
+    };
+    document.getElementById('withdrawBtn').onclick = () => {
+      msg.textContent = 'Withdrawals are not enabled. No payment request has been sent.';
+    };
+    document.getElementById('stepsBtn').onclick = () => {
+      document.getElementById('setupStatus').textContent = 'Preview UI ready. Real ad SDK: pending. Secure reward ledger: pending. Verified payout integration: pending. Android APK build: pending.';
+    };
+  </script>
+</body>
+</html>
